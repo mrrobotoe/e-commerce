@@ -18,7 +18,7 @@ return new class extends Migration
 //            $table->string('image');
 //            $table->string('description');
 //            $table->string('ingredients');
-            $table->string('category');k
+            $table->string('category');
             $table->timestamps();
         });
     }
