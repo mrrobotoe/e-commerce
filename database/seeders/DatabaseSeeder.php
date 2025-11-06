@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Flavor;
+use App\Models\Soda;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -34,5 +36,8 @@ class DatabaseSeeder extends Seeder
                 'is_admin' => true,
             ]
         );
+
+        Soda::factory(10)->create();
+        Flavor::factory(10)->create();
     }
 }

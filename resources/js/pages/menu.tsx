@@ -4,13 +4,14 @@ import { menu } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
+import DrinkForm from '@/components/drink-form';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Menu',
         href: menu().url,
     },
-];
+];1
 
 export default function Menu() {
     return (
@@ -44,17 +45,23 @@ export default function Menu() {
                 {/*        <button className={"rounded-full bg-yellow-200/70 px-4 py-3 text-gray-800 font-semibold border border-gray-600"}>Shop now</button>*/}
                 {/*    </div>*/}
                 {/*</div>*/}
-                <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                        {/*<img src={"/logo.png"} alt="Logo" className="absolute inset-0 size-full object-contain p-4 stroke-neutral-900/20 dark:stroke-neutral-100/20" />*/}
-                    </div>
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
+                <div className="grid grid-cols-2 gap-4 overflow-hidden ">
+                        <div className=" rounded-xl overflow-hidden border border-sidebar-border/70 dark:border-sidebar-border">
+                            <img src={"/soda-cup.jpg"} className={"bg-contain"} alt={"strawberry drink bg"} />
+                        </div>
+                        <div className={""}>
+                            <DrinkForm />
+                        </div>
+                    {/*<div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">*/}
+                    {/*    <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />*/}
+                    {/*    /!*<img src={"/logo.png"} alt="Logo" className="absolute inset-0 size-full object-contain p-4 stroke-neutral-900/20 dark:stroke-neutral-100/20" />*!/*/}
+                    {/*</div>*/}
+                    {/*<div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">*/}
+                    {/*    <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />*/}
+                    {/*</div>*/}
+                    {/*<div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">*/}
+                    {/*    <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />*/}
+                    {/*</div>*/}
                 </div>
             </div>
         </AppLayout>

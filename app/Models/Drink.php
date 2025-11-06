@@ -9,4 +9,10 @@ class Drink extends Model
 {
     /** @use HasFactory<\Database\Factories\DrinkFactory> */
     use HasFactory;
-}
+
+    protected function casts(): array
+    {
+        return [
+            'size' => 'string'
+        ];
+    }}

@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('drinks', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->enum('size', ['small', 'medium', 'large']);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->integer('total_price');
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('drinks');
+        Schema::dropIfExists('orders');
     }
 };

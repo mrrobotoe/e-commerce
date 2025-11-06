@@ -18,7 +18,7 @@ class FlavorFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->word(),
-            'price' => $this->faker->randomFloat(2, 0, 100),
+            'price' => $this->faker->randomFloat(2, 0.1, 1.0),
             'category' => $this->faker->randomElement(['Citrus', 'Berry', 'Tropical', 'Spicy', 'Herbal', 'Nutty', 'Floral', 'Earthy'])
         ];
     }
