@@ -19,7 +19,7 @@ use function Pest\Laravel\json;
     })->name('menu');
 
     Route::get('cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart');
-    Route::post('cart', [\App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
+//    Route::post('cart', [\App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
 //});
 
 require __DIR__.'/settings.php';

@@ -21,6 +21,8 @@ import {
     ShoppingCart,
 } from 'lucide-react';
 import AppLogo from './app-logo';
+import { useContext } from 'react';
+import { CartContext } from '@/lib/cart-store';
 
 const mainNavItems: NavItem[] = [
     {

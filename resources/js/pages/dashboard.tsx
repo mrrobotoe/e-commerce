@@ -3,6 +3,8 @@ import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
+import { useContext } from 'react';
+import { CartContext } from '@/lib/cart-store';
 // import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -13,6 +15,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Dashboard() {
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Home" />

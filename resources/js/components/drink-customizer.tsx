@@ -5,9 +5,15 @@ import { Button } from "@/components/ui/button"
 import { DrinkPreview } from "./drink-preview"
 import { OptionSelector } from "./option-selector"
 import { DrinkSummary } from "./drink-summary"
-import { Link, router, useRemember } from '@inertiajs/react';
+import { router, useRemember } from '@inertiajs/react';
+import { useContext } from 'react';
+import { CartContext } from '@/lib/cart-store';
 
+function getDrinkUID() {
+    return Date.now().toString(36);
+}
 export interface DrinkCustomization {
+    id: string | null
     base: string | null
     flavor: string | null
     addIns: string[]
@@ -58,8 +64,11 @@ export function DrinkCustomizer() {
     // const { drink } = page.props;
     // const { auth } = page.props;
     // const route = useRoute(Ziggy);
+    const { cartItems, addToCart } = useContext(CartContext);
 
+    console.log(cartItems);
     const [drinkState, setDrinkState] = useRemember<DrinkCustomization>({
+        id: getDrinkUID(),
         base: null,
         flavor: null,
         addIns: [],
@@ -113,6 +122,7 @@ export function DrinkCustomizer() {
 
     const handleReset = () => {
         setDrinkState({
+            id: getDrinkUID(),
             base: null,
             flavor: null,
             addIns: [],
@@ -120,6 +130,20 @@ export function DrinkCustomizer() {
             ice: "regular",
             cost: 0
         })
+    }
+
+    const handleAddToCart = () => {
+        addToCart({
+            ...drinkState,
+            cost: (
+                (BASES.find(b => b.id === drinkState.base)?.price || 0) +
+                (FLAVORS.find(f => f.id === drinkState.flavor)?.price || 0) +
+                drinkState.addIns.reduce((sum, addInId) => {
+                    return sum + (ADD_INS.find(a => a.id === addInId)?.price || 0);
+                }, 0)
+            )
+        });
+        router.get('cart');
     }
 
     return (
@@ -251,26 +275,7 @@ export function DrinkCustomizer() {
 
                             <Button
                                 // asChild
-                                onClick={() => {
-                                    const formData = new FormData();
-                                    for (const key of Object.keys(drinkState) as (keyof DrinkCustomization)[]) {
-                                        const value = drinkState[key];
-                                        const serialized = Array.isArray(value) ? JSON.stringify(value) : String(value ?? '');
-                                        formData.append(key, serialized);
-                                    }
-
-                                    {/* Calculate cost */}
-                                    const cost =
-                                            (drinkState.base ? BASES.find(base => base.id === drinkState.base)?.price || 0 : 0) +
-                                            (drinkState.flavor ? FLAVORS.find(flavor => flavor.id === drinkState.flavor)?.price || 0 : 0) +
-                                            drinkState.addIns.reduce((total, addInId) => {
-                                                const addIn = ADD_INS.find(addIn => addIn.id === addInId);
-                                                return total + (addIn ? addIn.price : 0);
-                                            }, 0)
-
-                                    formData.append('cost', String(cost));
-                                    router.post('cart', formData );
-                                }}
+                                onClick={handleAddToCart}
                                 disabled={
                                     !(
                                         drinkState.base &&

@@ -14,12 +14,10 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
 //        dd($request->all());
-        return Inertia::render('cart', [
-            'drink' => $request->get('drink'),
-        ]);
+        return Inertia::render('cart');
     }
 
     /**
