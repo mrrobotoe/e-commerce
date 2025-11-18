@@ -1,5 +1,6 @@
 import { InertiaLinkProps } from '@inertiajs/react';
 import { LucideIcon } from 'lucide-react';
+import { DrinkCustomization } from '@/components/drink-customizer';
 
 export interface Auth {
     user: User;
@@ -18,6 +19,7 @@ export interface NavGroup {
 export interface NavItem {
     title: string;
     href: NonNullable<InertiaLinkProps['href']>;
+    component: string;
     icon?: LucideIcon | null;
     isActive?: boolean;
 }
@@ -25,6 +27,7 @@ export interface NavItem {
 export interface SharedData {
     name: string;
     quote: { message: string; author: string };
+    drink: DrinkCustomization[];
     auth: Auth;
     sidebarOpen: boolean;
     [key: string]: unknown;

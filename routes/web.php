@@ -9,6 +9,7 @@ use function Pest\Laravel\json;
 //})->name('home');
 
 //Route::middleware(['auth', 'verified'])->group(function () {
+
     Route::get('/', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
@@ -17,9 +18,8 @@ use function Pest\Laravel\json;
         return Inertia::render('menu');
     })->name('menu');
 
-    Route::get('cart', function () {
-        return Inertia::render('cart');
-    })->name('cart');
+    Route::get('cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart');
+    Route::post('cart', [\App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
 //});
 
 require __DIR__.'/settings.php';

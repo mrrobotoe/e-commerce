@@ -26,16 +26,19 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Home',
         href: dashboard(),
+        component: 'dashboard',
         icon: HomeIcon,
     },
     {
         title: 'Menu',
         href: menu(),
+        component: 'menu',
         icon: GlassWater,
     },
     {
         title: 'Cart',
         href: cart(),
+        component: 'cart',
         icon: ShoppingCart,
     },
 ];
@@ -44,14 +47,15 @@ const footerNavItems: NavItem[] = [
 
     {
         title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
+        href: 'https://github.com/OmarH210/ChugHub',
+        component: 'github',
         icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
-    },
+    }
+    // {
+    //     title: 'Documentation',
+    //     href: 'https://laravel.com/docs/starter-kits#react',
+    //     icon: BookOpen,
+    // },
 ];
 
 export function AppSidebar() {

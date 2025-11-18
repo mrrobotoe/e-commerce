@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('flavors', function (Blueprint $table) {
+        Schema::create('icepct', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name')->unique()->default('No Nice');
             $table->string('slug')->unique();
-            $table->string('price')->default(0);
-            $table->string('category');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('flavors');
+        Schema::dropIfExists('icepct');
     }
 };
