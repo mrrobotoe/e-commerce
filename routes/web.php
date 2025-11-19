@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use function Pest\Laravel\json;
@@ -8,19 +9,31 @@ use function Pest\Laravel\json;
 //    return Inertia::render('welcome');
 //})->name('home');
 
-//Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 
-    Route::get('/', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+    Route::post('/flavors', [\App\Http\Controllers\FlavorController::class, 'store'])->name('flavors.store');
+});
 
-    Route::get('menu', function () {
-        return Inertia::render('menu');
-    })->name('menu');
+Route::get('/', function () {
+    return Inertia::render('dashboard');
+})->name('dashboard');
 
-    Route::get('cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart');
-//    Route::post('cart', [\App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
-//});
+Route::get('menu', function () {
+    $addIns = DB::table('addins')->get();
+    $flavors = DB::table('flavors')->get();
+    $bases = DB::table('bases')->get();
+
+    return Inertia::render('menu', [
+        'addIns' => $addIns,
+        'flavors' => $flavors,
+        'bases' => $bases,
+    ]);
+})->name('menu');
+
+Route::get('cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart');
+
+
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

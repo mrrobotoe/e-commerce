@@ -2,14 +2,13 @@
 
 import { Card } from "@/components/ui/card"
 import type { DrinkCustomization } from "./drink-customizer"
-
+import { BASES } from './drink-customizer';
 interface DrinkPreviewProps {
     customization: DrinkCustomization
-    bases: Array<{ id: string; label: string; color: string }>
 }
 
-export function DrinkPreview({ customization, bases }: DrinkPreviewProps) {
-    const selectedBase = bases.find((b) => b.id === customization.base)
+export function DrinkPreview({ customization }: DrinkPreviewProps) {
+    const selectedBase = BASES.find((b) => b.id === customization.base)
     const baseColor = selectedBase?.color || "#F5F5F5"
 
     return (

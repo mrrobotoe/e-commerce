@@ -29,7 +29,20 @@ class FlavorController extends Controller
      */
     public function store(StoreFlavorRequest $request)
     {
-        //
+        $request->validated();
+
+        $flavor = Flavor::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'category' => $request->category,
+            'slug' => $request->slug
+        ]);
+
+        if ($flavor) {
+            return redirect()->back()->with('success', 'Flavor created successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Failed to create flavor.');
+        }
     }
 
     /**

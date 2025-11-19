@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDrinkRequest;
-use App\Http\Requests\UpdateDrinkRequest;
-use App\Models\Drink;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
-class DrinkController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +13,14 @@ class DrinkController extends Controller
     public function index()
     {
         $addIns = DB::table('addins')->get();
-        dd($addIns);
+        $flavors = DB::table('flavors')->get();
+        $bases = DB::table('bases')->get();
+//        dd($addIns, $flavors, $bases);
+        return Inertia::render('admin/dashboard', [
+            'addIns' => $addIns,
+            'flavors' => $flavors,
+            'bases' => $bases,
+        ]);
     }
 
     /**

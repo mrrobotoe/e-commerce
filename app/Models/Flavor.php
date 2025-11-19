@@ -9,4 +9,11 @@ class Flavor extends Model
 {
     /** @use HasFactory<\Database\Factories\FlavorFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'price',
+        'category',
+        'slug',
+    ];
 }

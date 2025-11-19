@@ -11,7 +11,7 @@ class StoreFlavorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreFlavorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255|unique:flavors,name',
+            'slug' => 'nullable|string|max:255|unique:flavors,slug',
+            'price' => 'required|numeric|min:0',
+            'category' => 'required|string|max:255',
         ];
     }
 }

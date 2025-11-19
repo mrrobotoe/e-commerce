@@ -5,19 +5,19 @@ import type { DrinkCustomization } from "./drink-customizer"
 
 interface DrinkSummaryProps {
     customization: DrinkCustomization
-    bases: Array<{ id: string; label: string, price: number }>
-    flavors: Array<{ id: string; label: string, price: number }>
-    addIns: Array<{ id: string; label: string, price: number }>
+    bases: Array<{ slug: string; name: string, price: string }>
+    flavors: Array<{ slug: string; name: string, price: string }>
+    addIns: Array<{ slug: string; name: string, price: string }>
 }
 
 export function DrinkSummary({ customization, bases, flavors, addIns }: DrinkSummaryProps) {
-    const baseLabel = bases.find((b) => b.id === customization.base)?.label
-    const flavorLabel = flavors.find((f) => f.id === customization.flavor)?.label
-    const addInLabels = addIns.filter((a) => customization.addIns.includes(a.id)).map((a) => a.label)
+    const baseLabel = bases.find((b) => b.slug === customization.base)?.name
+    const flavorLabel = flavors.find((f) => f.slug === customization.flavor)?.name
+    const addInLabels = addIns.filter((a) => customization.addIns.includes(a.slug)).map((a) => a.name)
 
-    const basePrice = bases.find((b) => b.id === customization.base)?.price
-    const flavorPrice = flavors.find((f) => f.id === customization.flavor)?.price
-    const addInPrice = addIns.filter((a) => customization.addIns.includes(a.id)).map((a) => a.price)
+    const basePrice = bases.find((b) => b.slug === customization.base)?.price
+    const flavorPrice = flavors.find((f) => f.slug === customization.flavor)?.price
+    const addInPrice = addIns.filter((a) => customization.addIns.includes(a.slug)).map((a) => a.price)
 
     const isComplete = customization.base && customization.flavor && customization.addIns.length > 0
     return (
@@ -66,7 +66,7 @@ export function DrinkSummary({ customization, bases, flavors, addIns }: DrinkSum
                     <div className="text-foreground space-y-1">
                         <div>{customization.carbonated ? "✓ Sparkling" : "x Non-Sparkling"}</div>
                         <div className="capitalize">
-                            {customization.ice.charAt(0).toUpperCase() + customization.ice.slice(1)} ice
+                            {`Ice Level: ${customization.ice}`}
                         </div>
                     </div>
                 </div>
@@ -77,9 +77,9 @@ export function DrinkSummary({ customization, bases, flavors, addIns }: DrinkSum
                         {
                             (
                                 (
-                                    ( basePrice ? basePrice : 0.00 ) +
-                                    ( flavorPrice ? flavorPrice : 0.00 ) +
-                                    ( addInPrice ? addInPrice.reduce((a, b) => a + b, 0 ) : 0.00 )
+                                    ( basePrice ? parseInt(basePrice) : 0.00 ) +
+                                    ( flavorPrice ? parseInt(flavorPrice) : 0.00 ) +
+                                    ( addInPrice ? addInPrice.reduce((a, b) => a + parseInt(b), 0 ) : 0.00 )
                                 ) / 100
                             ).toLocaleString(
                                 "en-US", { style: "currency", currency: "USD" }

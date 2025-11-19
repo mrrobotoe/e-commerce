@@ -59,14 +59,22 @@ export const ADD_INS = [
     // { id: "spice", label: "Spice" },
 ]
 
-export function DrinkCustomizer() {
+
+export function DrinkCustomizer({
+    bases,
+    flavors,
+    addIns
+                                }: {
+    flavors: { name: string; slug: string; price: string }[];
+    bases: { name: string; slug: string; price: string }[];
+    addIns: { name: string; slug: string; price: string }[];
+}) {
     // const page = usePage<SharedData>();
     // const { drink } = page.props;
     // const { auth } = page.props;
     // const route = useRoute(Ziggy);
-    const { cartItems, addToCart } = useContext(CartContext);
+    const { addToCart } = useContext(CartContext);
 
-    console.log(cartItems);
     const [drinkState, setDrinkState] = useRemember<DrinkCustomization>({
         id: getDrinkUID(),
         base: null,
@@ -166,9 +174,9 @@ export function DrinkCustomizer() {
                         <OptionSelector
                             title="Choose Your Base"
                             description="Start with your preferred base liquid"
-                            options={BASES.map((base) => ({
-                                id: base.id,
-                                label: base.label,
+                            options={bases.map((base) => ({
+                                id: base.slug,
+                                label: base.name,
                             }))}
                             selected={drinkState.base}
                             onSelect={handleBaseChange}
@@ -179,9 +187,9 @@ export function DrinkCustomizer() {
                         <OptionSelector
                             title="Add a Flavor"
                             description="Select one signature flavor"
-                            options={FLAVORS.map((flavor) => ({
-                                id: flavor.id,
-                                label: flavor.label,
+                            options={flavors.map((flavor) => ({
+                                id: flavor.slug,
+                                label: flavor.name,
                             }))}
                             selected={drinkState.flavor}
                             onSelect={handleFlavorChange}
@@ -192,9 +200,9 @@ export function DrinkCustomizer() {
                         <OptionSelector
                             title="Mix in Add-ins"
                             description="Choose multiple complementary ingredients"
-                            options={ADD_INS.map((addIn) => ({
-                                id: addIn.id,
-                                label: addIn.label,
+                            options={addIns.map((addIn) => ({
+                                id: addIn.slug,
+                                label: addIn.name,
                             }))}
                             selected={drinkState.addIns}
                             onSelect={handleAddInToggle}
@@ -295,13 +303,12 @@ export function DrinkCustomizer() {
                     <div className="space-y-6">
                         <DrinkPreview
                             customization={drinkState}
-                            bases={BASES}
                         />
                         <DrinkSummary
                             customization={drinkState}
-                            bases={BASES}
-                            flavors={FLAVORS}
-                            addIns={ADD_INS}
+                            bases={bases}
+                            flavors={flavors}
+                            addIns={addIns}
                         />
                     </div>
                 </div>
