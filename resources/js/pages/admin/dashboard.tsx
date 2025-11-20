@@ -5,6 +5,7 @@ import { type BreadcrumbItem } from '@/types';
 import { Head, router, usePage } from '@inertiajs/react';
 
 import AddFlavorForm from '@/pages/admin/add-flavor-form';
+import AddBaseForm from '@/pages/admin/add-base-form';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -67,7 +68,10 @@ export default function AdminDashboard({
                     </div>
                 </div>
                 {/* Buttons to add new flavors, bases, add-ins could go here */}
-                <AddFlavorForm />
+                <div className="flex md:flex-row gap-4">
+                    <AddFlavorForm />
+                    <AddBaseForm />
+                </div>
             </div>
         </AppLayout>
     );

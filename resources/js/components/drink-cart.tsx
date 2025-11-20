@@ -13,7 +13,11 @@ import { Button } from '@/components/ui/button';
 const TAX_RATE = 0.08;
 
 
-export default function DrinkCart() {
+export default function DrinkCart({
+    bases,
+    flavors,
+    addIns,
+                                  }) {
     const { cartItems, clearCart } = useContext(CartContext);
     const [discount, setDiscount] =  useState(0);
 
@@ -38,9 +42,9 @@ export default function DrinkCart() {
                                     Drink Base:{' '}
                                     <span className={"font-light text-sm"}>
                                     {
-                                        BASES.find((base) => {
-                                            return base.id === item.base;
-                                        })?.label
+                                        bases.find((base) => {
+                                            return base.slug === item.base;
+                                        })?.name
                                     }
                                     </span>
                                 </p>
@@ -48,9 +52,9 @@ export default function DrinkCart() {
                                     Flavor:{' '}
                                     <span className={"font-light text-sm"}>
                                         {
-                                            FLAVORS.find((flavor) => {
-                                                return flavor.id == item.flavor;
-                                            })?.label
+                                            flavors.find((flavor) => {
+                                                return flavor.slug == item.flavor;
+                                            })?.name
                                         }
                                     </span>
                                 </p>
@@ -59,10 +63,10 @@ export default function DrinkCart() {
                                     <span className={"font-light text-sm"}>
                                     {
                                         item.addIns.map((addIn) => {
-                                            const addInItem = ADD_INS.find(
-                                                (ai) => ai.id == addIn
+                                            const addInItem = addIns.find(
+                                                (ai) => ai.slug == addIn
                                             );
-                                            return addInItem ? addInItem.label : null;
+                                            return addInItem ? addInItem.name : null;
                                         }).join(", ")
                                     }
                                     </span>

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDrinkRequest;
 use App\Http\Requests\UpdateDrinkRequest;
+use App\Models\Base;
 use App\Models\Drink;
+use App\Models\Flavor;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class CartController extends Controller
@@ -17,7 +20,15 @@ class CartController extends Controller
     public function index()
     {
 //        dd($request->all());
-        return Inertia::render('cart');
+        $bases = DB::table('bases')->get();
+        $flavors = DB::table('flavors')->get();
+        $addIns = DB::table('addins')->get();
+
+        return Inertia::render('cart', [
+            'bases' => $bases,
+            'flavors' => $flavors,
+            'addIns' => $addIns,
+        ]);
     }
 
     /**

@@ -11,8 +11,8 @@ use function Pest\Laravel\json;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin');
-
     Route::post('/flavors', [\App\Http\Controllers\FlavorController::class, 'store'])->name('flavors.store');
+    Route::post('/bases', [\App\Http\Controllers\BaseController::class, 'store'])->name('bases.store');
 });
 
 Route::get('/', function () {

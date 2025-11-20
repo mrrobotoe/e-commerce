@@ -13,11 +13,15 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Cart() {
+export default function Cart({
+    bases,
+    flavors,
+    addIns,
+                             }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Cart" />
-            <DrinkCart />
+            <DrinkCart bases={bases} flavors={flavors} addIns={addIns} />
         </AppLayout>
     );
 }
