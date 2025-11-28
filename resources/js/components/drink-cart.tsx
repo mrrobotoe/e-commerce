@@ -10,7 +10,7 @@ import Discount from '@/components/discount';
 import { useContext, useState } from 'react';
 import { Button } from '@/components/ui/button';
 
-const TAX_RATE = 0.08;
+const TAX_RATE = 0.0825;
 
 
 export default function DrinkCart({

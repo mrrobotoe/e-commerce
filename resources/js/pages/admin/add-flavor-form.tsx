@@ -16,7 +16,7 @@ import { Form, router, usePage } from '@inertiajs/react';
 
 export default function AddFlavorForm() {
     const props = usePage().props;
-    console.log(props.errors);
+
     return (
         <Dialog>
             <Form method={"post"} action={"/flavors"} id={"add-flavor-form"}>
@@ -75,7 +75,9 @@ export default function AddFlavorForm() {
                         <DialogClose asChild>
                             <Button variant={"outline"}>Cancel</Button>
                         </DialogClose>
-                        <Button type={"submit"} form={"add-flavor-form"}>Save Flavor</Button>
+                        <DialogClose asChild>
+                            <Button type={"submit"} form={"add-flavor-form"}>Save Flavor</Button>
+                        </DialogClose>
                     </DialogFooter>
                 </DialogContent>
             </Form>
